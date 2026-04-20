@@ -32,7 +32,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/app-green
-            sudo docker stop app || true
-            sudo docker rm app || true
-            sudo docker run -d -p 3000:3000 --name app ${{ secrets.DOCKER_USERNAME }}/app-green
+              sudo docker stop app || true
+              sudo docker rm app || true
+              sudo docker pull renita7008/app-green
+              sudo docker run -d -p 3000:3000 --name app renita7008/app-green
