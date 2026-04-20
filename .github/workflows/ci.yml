@@ -1,0 +1,38 @@
+name: Blue-Green CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker Image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/app-green .
+
+      - name: Push Docker Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/app-green
+
+      - name: Deploy to EC2 (GREEN)
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.GREEN_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/app-green
+            sudo docker stop app || true
+            sudo docker rm app || true
+            sudo docker run -d -p 3000:3000 --name app ${{ secrets.DOCKER_USERNAME }}/app-green
