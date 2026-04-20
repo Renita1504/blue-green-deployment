@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Blue Version</title>
+            <title>Green Deployment</title>
             <style>
                 body {
                     margin: 0;
@@ -16,31 +16,46 @@ app.get('/', (req, res) => {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+                    background: linear-gradient(135deg, #16a34a, #14532d);
                     font-family: Arial, sans-serif;
                     color: white;
                 }
                 .container {
                     text-align: center;
-                    background: rgba(255,255,255,0.1);
+                    background: rgba(0,0,0,0.3);
                     padding: 50px;
                     border-radius: 20px;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+                    animation: fadeIn 1s ease-in-out;
                 }
                 h1 {
-                    font-size: 55px;
-                    margin-bottom: 10px;
+                    font-size: 60px;
+                    margin-bottom: 15px;
                 }
                 p {
-                    font-size: 20px;
+                    font-size: 22px;
+                    margin: 5px 0;
+                }
+                .badge {
+                    margin-top: 15px;
+                    padding: 10px 20px;
+                    background: white;
+                    color: #16a34a;
+                    border-radius: 20px;
+                    font-weight: bold;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: scale(0.9); }
+                    to { opacity: 1; transform: scale(1); }
                 }
             </style>
         </head>
         <body>
             <div class="container">
-                <h1>BLUE VERSION 💙</h1>
-                <p>Initial Production Deployment</p>
-                <p>Running Stable Version</p>
+                <h1>GREEN DEPLOYMENT 🚀</h1>
+                <p>New Version Deployed via CI/CD</p>
+                <p>Zero Downtime Deployment</p>
+                <div class="badge">LIVE RELEASE ✅</div>
             </div>
         </body>
         </html>
