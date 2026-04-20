@@ -32,7 +32,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-              sudo docker stop app || true
-              sudo docker rm app || true
+              sudo docker ps -q --filter "publish=3000" | xargs -r sudo docker stop
+              sudo docker ps -aq --filter "publish=3000" | xargs -r sudo docker rm
               sudo docker pull renita7008/app-green
               sudo docker run -d -p 3000:3000 --name app renita7008/app-green
