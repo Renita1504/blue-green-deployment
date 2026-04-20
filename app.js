@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-   res.send("CI/CD WORKING 🚀");
+   res.send("GREEN DEPLOYMENT 🚀");
 });
 
 app.listen(PORT, () => {
